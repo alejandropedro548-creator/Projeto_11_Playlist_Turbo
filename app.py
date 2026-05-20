@@ -13,7 +13,6 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
-/* FUNDO GERAL */
 html, body,
 [data-testid="stAppViewContainer"],
 [data-testid="stMain"] {
@@ -22,13 +21,11 @@ html, body,
     font-family: 'DM Sans', sans-serif !important;
 }
 
-/* GRADIENTE VERDE NO TOPO (estilo Spotify) */
 [data-testid="stMainBlockContainer"] {
     background: linear-gradient(180deg, #1a3d25 0%, #121212 380px) !important;
     padding-top: 2rem !important;
 }
 
-/* SIDEBAR PRETA */
 [data-testid="stSidebar"] {
     background-color: #000000 !important;
     border-right: 1px solid #282828 !important;
@@ -45,7 +42,6 @@ html, body,
     text-transform: uppercase !important;
 }
 
-/* TITULO */
 h1 {
     font-family: 'DM Sans', sans-serif !important;
     font-weight: 700 !important;
@@ -60,7 +56,6 @@ h2, h3 {
     color: #FFFFFF !important;
 }
 
-/* SUBTITULO */
 [data-testid="stSubheader"] p {
     color: #B3B3B3 !important;
     font-weight: 400 !important;
@@ -68,7 +63,6 @@ h2, h3 {
     font-size: 0.9rem !important;
 }
 
-/* ARTISTA SELECIONADO */
 [data-testid="stMarkdown"] h2 {
     color: #1DB954 !important;
     border-left: 4px solid #1DB954 !important;
@@ -83,7 +77,6 @@ code {
     padding: 2px 8px !important;
 }
 
-/* CARDS DE MÚSICA */
 [data-testid="stVerticalBlock"] > [data-testid="stVerticalBlock"] {
     background-color: #181818 !important;
     border-radius: 8px !important;
@@ -97,7 +90,6 @@ code {
     border-color: #1DB954 !important;
 }
 
-/* MÉTRICAS */
 [data-testid="stMetric"] {
     background-color: #282828 !important;
     border-radius: 8px !important;
@@ -117,13 +109,11 @@ code {
     font-weight: 700 !important;
 }
 
-/* DIVISOR */
 hr {
     border-color: #282828 !important;
     margin: 1.5rem 0 !important;
 }
 
-/* BOTÃO SPOTIFY */
 [data-testid="stLinkButton"] a {
     background-color: #1DB954 !important;
     color: #000000 !important;
@@ -141,21 +131,18 @@ hr {
     transform: scale(1.04) !important;
 }
 
-/* VIDEO */
 [data-testid="stVideo"] {
     border-radius: 8px !important;
     overflow: hidden !important;
     margin-top: 0.5rem !important;
 }
 
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #121212; }
 ::-webkit-scrollbar-thumb { background: #535353; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #1DB954; }
 </style>
 """, unsafe_allow_html=True)
-# ──────────────────────────────────────────────────────────────────────────────
 
 ### 1. Leia o Arquivo Dados_Artistas.csv e o Transforme em dataframe
 df = pd.read_parquet("Dados_Artistas.parquet")
@@ -189,5 +176,5 @@ for index, row in df_artista.iterrows():
             col2.metric("📺 YouTube Views", f"{row['Views']:,.0f}")
             
             st.video(row['Url_youtube'])
+            st.link_button('▶ Ouça no Spotify', url=row['Url_spotify'], type='primary')  # ← movido para dentro do loop
             st.markdown("---")
-st.link_button('Ouça no Spotify', url=row['Url_spotify'], type='primary')
